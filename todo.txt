@@ -1,0 +1,15 @@
+
+add default selection
+add logo to sidebar
+Enable Dark theme
+clear filter bug
+add unknown values
+rename files
+
+//Intensity
+//Likelihood
+//Relevance
+//Year
+//Topics
+//Country
+//Region 
