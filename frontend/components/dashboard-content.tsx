@@ -2,15 +2,15 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { IntensityChart } from "@/components/charts/intensity-chart"
-import { LikelihoodChart } from "@/components/charts/likelihood-chart"
-import { RegionDistributionChart } from "@/components/charts/region-distribution-chart"
-import { TopicTrendsChart } from "@/components/charts/topic-trends-chart"
-import { SectorComparisonChart } from "@/components/charts/sector-comparison-chart"
-import { CountryMapChart } from "@/components/charts/country-map-chart"
+import { IntensityMonthChart } from "@/components/charts/IntensityMonthChart"
+import { IntensityYearChart } from "@/components/charts/IntensityYearChart"
+import { LikelihoodChart } from "@/components/charts/LikelihoodChart"
+import { RegionDistributionChart } from "@/components/charts/RegionDistributionChart"
+import { TopicTrendsChart } from "@/components/charts/TopicTrendsChart"
+import { SectorComparisonChart } from "@/components/charts/SectorComparisonChart"
+import { CountryMapChart } from "@/components/charts/CountryMapChart"
 import { IntensityRelevanceAreachart } from "@/components/charts/intensity-relevance-areachart"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useFilter } from "./filter-context"
 import { useData } from "./DataContext"
 
 interface DashboardContentProps {
@@ -69,7 +69,7 @@ export function DashboardContent({ isLoading }: DashboardContentProps) {
               <CardDescription>Average intensity across different published months</CardDescription>
             </CardHeader>
             <CardContent className="h-[300px]">
-              {isLoading ? <Skeleton className="h-[300px] w-full" /> : <IntensityChart dataKey="month" />}
+              {isLoading ? <Skeleton className="h-[300px] w-full" /> : <IntensityMonthChart />}
             </CardContent>
           </Card>
           <Card className="col-span-1">
@@ -78,7 +78,7 @@ export function DashboardContent({ isLoading }: DashboardContentProps) {
               <CardDescription>Average intensity across different published years</CardDescription>
             </CardHeader>
             <CardContent className="h-[300px]">
-              {isLoading ? <Skeleton className="h-[300px] w-full" /> : <IntensityChart dataKey="year" />}
+              {isLoading ? <Skeleton className="h-[300px] w-full" /> : <IntensityYearChart />}
             </CardContent>
           </Card>
         </div>

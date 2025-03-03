@@ -15,10 +15,11 @@ export function TopicTrendsChart() {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="year" />
         <YAxis />
-        <Tooltip />
+        <Tooltip labelStyle={{ color: "black" }} contentStyle={{ backgroundColor: "white", color: "black", border: "1px solid #ccc" }} itemStyle={{ color: "black" }} />
         {uniqueTopics.map((entry, index) => (
           <Line type="monotone" dataKey={entry} stroke={`hsl(var(--chart-${(index + 1) % 8}))`} activeDot={{ r: 6 }} />
         ))}
+        <Legend />
       </LineChart>
     </ResponsiveContainer>
   )
