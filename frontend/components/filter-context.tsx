@@ -27,15 +27,16 @@ export function FilterProvider({ children }: { children: ReactNode }) {
         const response = await fetch('http://127.0.0.1:5000/filters/unique')
         const data = await response.json()
 
-        let sortedFilters: Record<string, string[]> = {};
-
         for (const key in data) {
-          sortedFilters[key] = data[key]
-            .slice() // Create a copy to avoid mutating the original array
-            .sort() // Sort alphabetically or numerically
+          data[key].sort()
         }
         
-        setFilters(sortedFilters)
+        setFilters(data)
+        
+        setSelectedFilters((prevFilters) => ({
+          ...prevFilters,
+          end_year: data["end_year"].slice(0, 2),
+        }));
       } catch (error) {
         console.error("Failed to fetch filters:", error)
       }
@@ -63,7 +64,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
   }
 
   const clearFilters = () => {
-    setSelectedFilters({})
+    setSelectedFilters({});
   }
 
   return (

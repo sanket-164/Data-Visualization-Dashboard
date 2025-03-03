@@ -15,12 +15,9 @@ import {
 import { BarChart3, Filter, SquareX } from "lucide-react"
 import { FilterSection } from "@/components/filter-section"
 import { useFilter } from "@/components/filter-context"
-import { useData } from "@/components/DataContext"
 
 export function DashboardSidebar() {
   const { filters, clearFilters } = useFilter()
-  const { getFilteredData } = useData()
-
   return (
     <Sidebar>
       <SidebarHeader className="border-b">
@@ -44,7 +41,7 @@ export function DashboardSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="border-t p-2">
-        <SidebarMenu>
+        {/* <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton onClick={getFilteredData}>
               <div className="flex items-center gap-2">
@@ -53,7 +50,7 @@ export function DashboardSidebar() {
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
-        </SidebarMenu>
+        </SidebarMenu> */}
         <SidebarMenu>
         <SidebarMenuItem>
             <SidebarMenuButton onClick={clearFilters}>

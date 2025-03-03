@@ -52,6 +52,17 @@ export function DataProvider({ children }: { children: ReactNode }) {
         ).toString()
     }
 
+    const getDataWithoutFilters = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/filters/data`)
+            const filteredData = await response.json()
+            
+            setData(filteredData)
+        } catch (error) {
+            console.error("Failed to fetch filtered data:", error)
+        }
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -63,15 +74,19 @@ export function DataProvider({ children }: { children: ReactNode }) {
                 console.error("Failed to fetch data:", error)
             }
         }
-        fetchData()
-    }, [])
+
+        if (Object.keys(selectedFilters).length > 0) {
+            fetchData();
+        } else {
+            getDataWithoutFilters();
+        }
+    }, [selectedFilters])
 
     const getFilteredData = async () => {
         try {
-            console.log(toQueryString(selectedFilters))
             const response = await fetch(`http://127.0.0.1:5000/filters/data?${toQueryString(selectedFilters)}`)
             const filteredData = await response.json()
-            console.log(filteredData)
+            
             setData(filteredData)
         } catch (error) {
             console.error("Failed to fetch filtered data:", error)

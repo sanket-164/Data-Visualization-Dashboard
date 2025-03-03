@@ -1,6 +1,5 @@
 "use client"
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { IntensityMonthChart } from "@/components/charts/IntensityMonthChart"
 import { IntensityYearChart } from "@/components/charts/IntensityYearChart"

@@ -258,6 +258,24 @@ def apply_filters(filters):
 def get_filtered_data(filters):
     data = apply_filters(filters)
 
+    if data == []:
+        return {
+            "stats": {
+                "num_datapoints": 0,
+                "avg_intensity": 0,
+                "avg_relevance": 0,
+                "avg_likelihood": 0,
+            },
+            "monthly_intensity": [{}],
+            "yearly_intensity": [{}],
+            "intensity_relevance": [{}],
+            "pestle_likelihood": [{}],
+            "region_distribution": [{}],
+            "country_data": [{}],
+            "topic_trends": [{}],
+            "irl_yearly_comparison": [{}]
+        }
+
     df = pd.DataFrame(data)
 
     stats = get_stats(df)
@@ -277,8 +295,6 @@ def get_filtered_data(filters):
     region_distribution = get_region_distribution(df)
 
     irl_yearly_comparison = get_IRL_yearly_comparison(df)
-    
-    print(irl_yearly_comparison)
 
     return {
         "stats": stats,
