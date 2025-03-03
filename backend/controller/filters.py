@@ -278,6 +278,10 @@ def get_filtered_data(filters):
 
     df = pd.DataFrame(data)
 
+    df['intensity'].fillna(0, inplace=True)
+    df['relevance'].fillna(0, inplace=True)
+    df['likelihood'].fillna(0, inplace=True)
+
     stats = get_stats(df)
 
     monthly_intensity = get_monthly_intensity(df)
