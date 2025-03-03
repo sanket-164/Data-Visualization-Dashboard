@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
-import { useFilter } from "@/components/filter-context"
+import { useFilter } from "@/components/FilterContext"
 
 interface DataContextType {
     data: {

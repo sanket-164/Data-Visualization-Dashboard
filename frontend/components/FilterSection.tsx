@@ -2,10 +2,8 @@
 
 import { useState } from "react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
 import { ChevronDown } from "lucide-react"
-import { useFilter } from "@/components/filter-context"
+import { useFilter } from "@/components/FilterContext"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Input } from "@/components/ui/input"
 
@@ -41,14 +39,16 @@ export function FilterSection({ title, filterKey, options }: FilterSectionProps)
           <div className="space-y-2">
             {filteredOptions.map((option) => (
               <div key={option} className="flex items-center space-x-2">
-                <Checkbox
+                <input
+                  type="checkbox"
                   id={`${filterKey}-${option}`}
                   checked={selectedFilters[filterKey]?.includes(option)}
-                  onCheckedChange={() => toggleFilter(filterKey, option)}
+                  onChange={() => toggleFilter(filterKey, option)}
+                  className="h-4 w-4 accent-primary cursor-pointer"
                 />
-                <Label htmlFor={`${filterKey}-${option}`} className="text-sm cursor-pointer">
+                <label htmlFor={`${filterKey}-${option}`} className="text-sm cursor-pointer">
                   {option}
-                </Label>
+                </label>
               </div>
             ))}
             {filteredOptions.length === 0 && <div className="text-sm text-muted-foreground py-2">No options found</div>}

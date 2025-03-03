@@ -1,11 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { DashboardSidebar } from "@/components/dashboard-sidebar"
-import { DashboardHeader } from "@/components/dashboard-header"
-import { DashboardContent } from "@/components/dashboard-content"
+import { DashboardSidebar } from "@/components/DashboardSidebar"
+import { DashboardHeader } from "@/components/DashboardHeader"
+import { DashboardContent } from "@/components/DashboardContent"
 import { SidebarProvider } from "@/components/ui/sidebar"
-import { FilterProvider } from "@/components/filter-context"
+import { FilterProvider } from "@/components/FilterContext"
 import { DataProvider } from "@/components/DataContext"
 
 export default function Dashboard() {

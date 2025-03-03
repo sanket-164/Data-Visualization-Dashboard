@@ -29,7 +29,7 @@ export function CountryMapChart() {
           paddingAngle={2}
           dataKey="value"
           nameKey="country"
-          label={({ country }) => country}
+          label={({ country, percent }) => `${country}: ${(percent * 100).toFixed(0)}%`}
           labelLine={true}
         >
           {data.country_data.map((entry, index) => (

@@ -1,6 +1,6 @@
 "use client"
 
-import { ModeToggle } from "@/components/mode-toggle"
+import { ModeToggle } from "@/components/ModeToggle"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {

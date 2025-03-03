@@ -30,9 +30,9 @@ export function FilterProvider({ children }: { children: ReactNode }) {
         for (const key in data) {
           data[key].sort()
         }
-        
+
         setFilters(data)
-        
+
         setSelectedFilters((prevFilters) => ({
           ...prevFilters,
           end_year: data["end_year"].slice(0, 2),
@@ -55,8 +55,6 @@ export function FilterProvider({ children }: { children: ReactNode }) {
         [key]: updated,
       }
     })
-
-    console.log(selectedFilters)
   }
 
   const replaceSelectedFilters = (replaceFilters: Record<string, string[]>) => {
@@ -65,6 +63,11 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 
   const clearFilters = () => {
     setSelectedFilters({});
+    const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkBoxes.forEach((checkBox) => {
+      checkBox.checked = false;
+    });
   }
 
   return (

@@ -13,8 +13,8 @@ import {
   SidebarMenuButton
 } from "@/components/ui/sidebar"
 import { BarChart3, Filter, SquareX } from "lucide-react"
-import { FilterSection } from "@/components/filter-section"
-import { useFilter } from "@/components/filter-context"
+import { FilterSection } from "@/components/FilterSection"
+import { useFilter } from "@/components/FilterContext"
 
 export function DashboardSidebar() {
   const { filters, clearFilters } = useFilter()
