@@ -1,7 +1,7 @@
 "use client"
 
 import { AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
-import { useData } from "../DataContext"
+import { useData } from "@/components/DataContext"
 
 export function IntensityYearChart() {
   const { data } = useData();

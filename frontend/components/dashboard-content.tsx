@@ -9,7 +9,7 @@ import { RegionDistributionChart } from "@/components/charts/RegionDistributionC
 import { TopicTrendsChart } from "@/components/charts/TopicTrendsChart"
 import { SectorComparisonChart } from "@/components/charts/SectorComparisonChart"
 import { CountryMapChart } from "@/components/charts/CountryMapChart"
-import { IntensityRelevanceAreachart } from "@/components/charts/intensity-relevance-areachart"
+import { IntensityRelevanceLikelihoodAreachart } from "@/components/charts/IRLAreaChart"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useData } from "./DataContext"
 
@@ -136,36 +136,14 @@ export function DashboardContent({ isLoading }: DashboardContentProps) {
 
         <Card>
           <CardHeader>
-            <CardTitle>Topic Analysis</CardTitle>
-            <CardDescription>Detailed breakdown by topic</CardDescription>
+            <CardTitle>IRL Analysis</CardTitle>
+            <CardDescription>Average Intensity, Relevance, Likelihood year wise</CardDescription>
           </CardHeader>
           <CardContent className="h-[500px]">
-            {isLoading ? <Skeleton className="h-[500px] w-full" /> : <IntensityRelevanceAreachart />}
+            {isLoading ? <Skeleton className="h-[500px] w-full" /> : <IntensityRelevanceLikelihoodAreachart />}
           </CardContent>
         </Card>
-
       </div>
-
-      {/* <Tabs defaultValue="overview" className="mt-6">
-        <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="intensity">Intensity Analysis</TabsTrigger>
-          <TabsTrigger value="regional">Regional Analysis</TabsTrigger>
-          <TabsTrigger value="topics">Topic Analysis</TabsTrigger>
-        </TabsList>
-        <TabsContent value="overview" className="space-y-4">
-          
-        </TabsContent>
-        <TabsContent value="intensity" className="space-y-4">
-          
-        </TabsContent>
-        <TabsContent value="regional" className="space-y-4">
-          
-        </TabsContent>
-        <TabsContent value="topics" className="space-y-4">
-          
-        </TabsContent>
-      </Tabs> */}
     </main>
   )
 }

@@ -166,6 +166,18 @@ def get_country_data(df):
 
     return country_data
 
+def get_IRL_yearly_comparison(df):
+    # Group by 'published_year' and calculate the average
+    result = df.groupby("published_year")[["intensity", "relevance", "likelihood"]].mean().reset_index()
+
+    result['intensity'] = result['intensity'].round(2)
+    result['relevance'] = result['relevance'].round(2)
+    result['likelihood'] = result['likelihood'].round(2)
+
+    # Convert to JSON
+    irl_yearly_comparison = result.to_dict(orient="records")
+
+    return irl_yearly_comparison
 
 def apply_filters(filters):
 
@@ -264,6 +276,10 @@ def get_filtered_data(filters):
 
     region_distribution = get_region_distribution(df)
 
+    irl_yearly_comparison = get_IRL_yearly_comparison(df)
+    
+    print(irl_yearly_comparison)
+
     return {
         "stats": stats,
         "monthly_intensity": monthly_intensity,
@@ -273,4 +289,5 @@ def get_filtered_data(filters):
         "region_distribution": region_distribution,
         "country_data": country_data,
         "topic_trends": topic_trends,
+        "irl_yearly_comparison": irl_yearly_comparison
     }

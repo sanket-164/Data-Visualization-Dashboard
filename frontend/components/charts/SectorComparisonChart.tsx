@@ -1,7 +1,7 @@
 "use client"
 
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
-import { useData } from "../DataContext"
+import { useData } from "@/components/DataContext"
 
 export function SectorComparisonChart() {
   const { data } = useData();

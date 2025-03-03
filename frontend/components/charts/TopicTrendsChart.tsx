@@ -1,7 +1,7 @@
 "use client"
 
 import { Line, LineChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts"
-import { useData } from "../DataContext"
+import { useData } from "@/components/DataContext"
 export function TopicTrendsChart() {
   const { data } = useData();
 

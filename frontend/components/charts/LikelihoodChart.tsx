@@ -1,7 +1,7 @@
 "use client"
 
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip, Legend } from "recharts"
-import { useData } from "../DataContext"
+import { useData } from "@/components/DataContext"
 
 const COLORS = [
   "hsl(var(--chart-1))",

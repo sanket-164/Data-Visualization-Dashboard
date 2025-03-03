@@ -17,7 +17,8 @@ interface DataContextType {
         pestle_likelihood: any,
         region_distribution: any,
         country_data: any,
-        topic_trends: any
+        topic_trends: any,
+        irl_yearly_comparison: any,
     }
     getFilteredData: () => void
 }
@@ -39,7 +40,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
         pestle_likelihood: [],
         region_distribution: [],
         country_data: [],
-        topic_trends: []
+        topic_trends: [],
+        irl_yearly_comparison: []
     })
 
     const toQueryString = (params: Record<string, string[]>) => {

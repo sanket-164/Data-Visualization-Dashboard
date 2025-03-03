@@ -1,7 +1,7 @@
 "use client"
 
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
-import { useData } from "../DataContext"
+import { useData } from "@/components/DataContext"
 
 export function IntensityMonthChart() {
   const { data } = useData();
