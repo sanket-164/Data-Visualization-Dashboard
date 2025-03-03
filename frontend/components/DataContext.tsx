@@ -54,7 +54,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
     const getDataWithoutFilters = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/filters/data`)
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}filters/data`)
             const filteredData = await response.json()
             
             setData(filteredData)
@@ -66,7 +66,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/filters/data?${toQueryString(selectedFilters)}`)
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/filters/data?${toQueryString(selectedFilters)}`)
                 const fetchedData = await response.json()
 
                 setData(fetchedData)
@@ -84,7 +84,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
     const getFilteredData = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/filters/data?${toQueryString(selectedFilters)}`)
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/filters/data?${toQueryString(selectedFilters)}`)
             const filteredData = await response.json()
             
             setData(filteredData)

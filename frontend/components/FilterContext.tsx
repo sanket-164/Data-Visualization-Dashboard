@@ -24,7 +24,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
     const fetchFilters = async () => {
       try {
 
-        const response = await fetch('http://127.0.0.1:5000/filters/unique')
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/filters/unique`)
         const data = await response.json()
 
         for (const key in data) {
@@ -64,7 +64,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
   const clearFilters = () => {
     setSelectedFilters({});
     const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
-    
+
     checkBoxes.forEach((checkBox) => {
       checkBox.checked = false;
     });

@@ -278,9 +278,9 @@ def get_filtered_data(filters):
 
     df = pd.DataFrame(data)
 
-    df['intensity'].fillna(0, inplace=True)
-    df['relevance'].fillna(0, inplace=True)
-    df['likelihood'].fillna(0, inplace=True)
+    df['intensity'] = df['intensity'].fillna(0)
+    df['relevance'] = df['relevance'].fillna(0)
+    df['likelihood'] = df['likelihood'].fillna(0)
 
     stats = get_stats(df)
 

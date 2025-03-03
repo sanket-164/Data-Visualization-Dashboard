@@ -1,7 +1,10 @@
-from flask import jsonify, request
-from model.Data import Data
+import os
+from flask import jsonify
 from config import app, db
 from routes.filter_routes import filter_routes
+from dotenv import load_dotenv
+
+load_dotenv()
 
 @app.route("/")
 def get():
@@ -14,4 +17,4 @@ app.register_blueprint(filter_routes, url_prefix="/filters")
 if __name__ == "__main__":
     app.app_context().push()
     db.create_all()
-    app.run(debug=True)
+    app.run(debug=os.getenv("DEBUG_MODE") == "TRUE")
