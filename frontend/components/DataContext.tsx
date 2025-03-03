@@ -52,17 +52,6 @@ export function DataProvider({ children }: { children: ReactNode }) {
         ).toString()
     }
 
-    const getDataWithoutFilters = async () => {
-        try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}filters/data`)
-            const filteredData = await response.json()
-            
-            setData(filteredData)
-        } catch (error) {
-            console.error("Failed to fetch filtered data:", error)
-        }
-    }
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -75,13 +64,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
             }
         }
 
-        if (Object.keys(selectedFilters).length > 0) {
-            fetchData();
-        } else {
-            getDataWithoutFilters();
-        }
+        fetchData();
     }, [selectedFilters])
 
+    // This function is not used right now but can be used when we want to add an extra filter button
     const getFilteredData = async () => {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/filters/data?${toQueryString(selectedFilters)}`)

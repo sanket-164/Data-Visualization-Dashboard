@@ -1,52 +1,46 @@
-import psycopg2
+import sqlite3
 import json
 from datetime import datetime
 
-# PostgreSQL connection details
-DB_CONFIG = {
-    "host": "localhost",
-    "port": "5432",
-    "user": "postgres",
-    "password": "",
-    "database": "blackcoffer"
-}
+# SQLite database file
+DB_FILE = "blackcoffer.db"
 
 # Sample JSON array
 with open("jsondata.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 
 # Establish connection
-conn = psycopg2.connect(**DB_CONFIG)
+conn = sqlite3.connect(DB_FILE)
 cursor = conn.cursor()
 
 # Create table if not exists
 cursor.execute(
     """
     CREATE TABLE IF NOT EXISTS data (
-        id SERIAL PRIMARY KEY,
-        end_year VARCHAR(10),
-        intensity INT,
-        sector VARCHAR(255),
-        topic VARCHAR(255),
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        end_year TEXT,
+        intensity INTEGER,
+        sector TEXT,
+        topic TEXT,
         insight TEXT,
         url TEXT,
-        region VARCHAR(255),
-        start_year VARCHAR(10),
+        region TEXT,
+        start_year TEXT,
         impact TEXT,
-        added_month INT,
-        added_date INT,
-        added_year INT,
-        added_time TIME,
-        published_month INT,
-        published_date INT,
-        published_year INT,
-        published_time TIME,
-        country VARCHAR(255),
-        relevance INT,
-        pestle VARCHAR(255),
-        source VARCHAR(255),
+        added_month INTEGER,
+        added_date INTEGER,
+        added_year INTEGER,
+        added_time TEXT,
+        published_month INTEGER,
+        published_date INTEGER,
+        published_year INTEGER,
+        published_time TEXT,
+        country TEXT,
+        relevance INTEGER,
+        pestle TEXT,
+        source TEXT,
         title TEXT,
-        likelihood INT
+        likelihood INTEGER
     )
 """
 )
@@ -58,7 +52,7 @@ query = """
         added_month, added_date, added_year, added_time,
         published_month, published_date, published_year, published_time,
         country, relevance, pestle, source, title, likelihood
-    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
 
@@ -67,7 +61,7 @@ def parse_datetime(dt_str):
         dt_obj = datetime.strptime(dt_str, "%B, %d %Y %H:%M:%S")
         return dt_obj.month, dt_obj.day, dt_obj.year, dt_obj.strftime("%H:%M:%S")
     except ValueError:
-        print(dt_str)
+        print(f"Skipping invalid date format: {dt_str}")
         return None, None, None, None
 
 
@@ -81,14 +75,18 @@ for entry in data:
         query,
         (
             entry["end_year"] if entry["end_year"] else None,
-            entry["intensity"] if entry["intensity"] != "" else None,  # Fix here
-            entry["sector"] if entry["sector"] else None,
-            entry["topic"] if entry["topic"] else None,
-            entry["insight"] if entry["insight"] else None,
-            entry["url"] if entry["url"] else None,
-            entry["region"] if entry["region"] else None,
-            entry["start_year"] if entry["start_year"] else None,
-            entry["impact"] if entry["impact"] else None,
+            (
+                int(entry["intensity"])
+                if isinstance(entry["intensity"], str) and entry["intensity"].isdigit()
+                else entry["intensity"]
+            ),
+            entry["sector"] or None,
+            entry["topic"] or None,
+            entry["insight"] or None,
+            entry["url"] or None,
+            entry["region"] or None,
+            entry["start_year"] or None,
+            entry["impact"] or None,
             added_month,
             added_date,
             added_year,
@@ -97,12 +95,21 @@ for entry in data:
             published_date,
             published_year,
             published_time,
-            entry["country"] if entry["country"] else None,
-            entry["relevance"] if entry["relevance"] != "" else None,  # Fix here
-            entry["pestle"] if entry["pestle"] else None,
-            entry["source"] if entry["source"] else None,
-            entry["title"] if entry["title"] else None,
-            entry["likelihood"] if entry["likelihood"] != "" else None,  # Fix here
+            entry["country"] or None,
+            (
+                int(entry["relevance"])
+                if isinstance(entry["relevance"], str) and entry["relevance"].isdigit()
+                else entry["relevance"]
+            ),
+            entry["pestle"] or None,
+            entry["source"] or None,
+            entry["title"] or None,
+            (
+                int(entry["likelihood"])
+                if isinstance(entry["likelihood"], str)
+                and entry["likelihood"].isdigit()
+                else entry["likelihood"]
+            ),
         ),
     )
 
@@ -112,4 +119,4 @@ conn.commit()
 cursor.close()
 conn.close()
 
-print("Data inserted successfully.")
+print("Data inserted successfully into SQLite.")

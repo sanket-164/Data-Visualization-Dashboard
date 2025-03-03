@@ -14,9 +14,8 @@ const FilterContext = createContext<FilterContextType | undefined>(undefined)
 
 export function FilterProvider({ children }: { children: ReactNode }) {
   // Mock filter options - in a real app, these would come from the API
-  const [filters, setFilters] = useState<Record<string, string[]>>({})
-
-  const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({})
+  const [filters, setFilters] = useState<Record<string, string[]>>({});
+  const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
 
   // In a real app, this would fetch filter options from the API
   useEffect(() => {
@@ -63,6 +62,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 
   const clearFilters = () => {
     setSelectedFilters({});
+    
     const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
 
     checkBoxes.forEach((checkBox) => {

@@ -212,9 +212,6 @@ def apply_filters(filters):
         country_condition = or_(*[Data.country == country for country in filters["country"]])
         filter_conditions.append(country_condition)
 
-    # Combine all conditions using AND
-    final_query = and_(*filter_conditions) if filter_conditions else None
-
     if filter_conditions:
         query = Data.query.filter(and_(*filter_conditions))
     else:
@@ -278,9 +275,14 @@ def get_filtered_data(filters):
 
     df = pd.DataFrame(data)
 
+    df['intensity'] = pd.to_numeric(df['intensity'], errors='coerce')
+    df['relevance'] = pd.to_numeric(df['relevance'], errors='coerce')
+    df['likelihood'] = pd.to_numeric(df['likelihood'], errors='coerce')
+
     df['intensity'] = df['intensity'].fillna(0)
     df['relevance'] = df['relevance'].fillna(0)
     df['likelihood'] = df['likelihood'].fillna(0)
+
 
     stats = get_stats(df)
 
